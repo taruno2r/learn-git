@@ -78,6 +78,7 @@ body {
     color: var(--ink);
     font: 400 16px/1.65 var(--sans);
     -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
 }
 
 a { color: var(--accent); text-underline-offset: 3px; }
@@ -158,23 +159,33 @@ h1 { font-size: clamp(56px, 11vw, 128px); letter-spacing: -0.01em; }
 /* ------------------------------------------------------------------
    Concept sections
 ------------------------------------------------------------------- */
-.concept { padding-bottom: 96px; scroll-margin-top: 0; }
-
-/* Full-screen stage: heading + animation fill the viewport, edge to edge.
-   The box-shadow/clip-path pair paints the background full-bleed while the
-   content stays aligned with .wrap, without causing horizontal scroll. */
-.stage {
+/* Each concept (illustration + explanation) sits on one shared, edge-to-edge
+   background. The ::before layer bleeds out to the viewport edges while the
+   content stays aligned with .wrap; body clips the overflow. */
+.concept {
     position: relative;
+    isolation: isolate;
+    padding-bottom: 96px;
+    scroll-margin-top: 0;
+}
+.concept::before {
+    content: "";
+    position: absolute;
+    inset: 0 calc(50% - 50vw);
+    z-index: -1;
+    background:
+        radial-gradient(circle, color-mix(in srgb, var(--muted) 22%, transparent) 1px, transparent 1.5px) 0 0 / 28px 28px,
+        var(--card);
+}
+.concept + .concept::before { border-top: 1px solid var(--rule); }
+
+/* Full-screen stage: heading + animation fill the viewport. */
+.stage {
     min-height: 100vh;
     min-height: 100svh;
     display: flex;
     flex-direction: column;
     padding: 48px 0 32px;
-    background:
-        radial-gradient(circle, color-mix(in srgb, var(--muted) 22%, transparent) 1px, transparent 1.5px) 0 0 / 28px 28px,
-        var(--card);
-    box-shadow: 0 0 0 100vmax var(--card);
-    clip-path: inset(0 -100vmax);
 }
 
 .concept-body {

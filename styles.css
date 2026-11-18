@@ -5,6 +5,7 @@
     --paper: #f5f0dc;
     --card: #fffbef;
     --surface: #fbf6e6;
+    --band: #f1e6c6;
     --ink: #1c1813;
     --muted: #6f6656;
     --rule: #e0d6ba;
@@ -40,6 +41,7 @@
         --paper: #15120e;
         --card: #1e1a14;
         --surface: #25201a;
+        --band: #2b241b;
         --ink: #f2ead6;
         --muted: #a89e88;
         --rule: #3b342a;
@@ -78,6 +80,7 @@ body {
     color: var(--ink);
     font: 400 16px/1.65 var(--sans);
     -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
 }
 
 a { color: var(--accent); text-underline-offset: 3px; }
@@ -98,7 +101,7 @@ code {
 /* ------------------------------------------------------------------
    Hero
 ------------------------------------------------------------------- */
-.hero { padding: 72px 0 40px; border-bottom: 1px solid var(--rule); }
+.hero { padding: 72px 0 40px; }
 
 .eyebrow {
     margin: 0 0 8px;
@@ -158,21 +161,45 @@ h1 { font-size: clamp(56px, 11vw, 128px); letter-spacing: -0.01em; }
 /* ------------------------------------------------------------------
    Concept sections
 ------------------------------------------------------------------- */
+/* Each concept (illustration + explanation) sits on one shared, edge-to-edge
+   background. The ::before layer bleeds out to the viewport edges while the
+   content stays aligned with .wrap; body clips the overflow. */
 .concept {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
-    grid-template-areas:
-        "head viz"
-        "body viz";
-    grid-template-rows: auto 1fr;
-    column-gap: 56px;
-    padding: 80px 0;
-    border-bottom: 1px solid var(--rule);
-    scroll-margin-top: 16px;
+    position: relative;
+    isolation: isolate;
+    padding-bottom: 96px;
+    scroll-margin-top: 0;
+    --stage-bg: var(--card);
 }
-.concept-head { grid-area: head; }
-.concept-body { grid-area: body; }
-.viz { grid-area: viz; }
+/* Alternate the background on every other concept so sections are easy to tell apart. */
+.concept:nth-of-type(even) { --stage-bg: var(--band); }
+.concept::before {
+    content: "";
+    position: absolute;
+    inset: 0 calc(50% - 50vw);
+    z-index: -1;
+    background:
+        radial-gradient(circle, color-mix(in srgb, var(--muted) 22%, transparent) 1px, transparent 1.5px) 0 0 / 28px 28px,
+        var(--stage-bg);
+}
+.concept + .concept::before { border-top: 1px solid var(--rule); }
+
+/* Full-screen stage: heading + animation fill the viewport. */
+.stage {
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    padding: 48px 0 32px;
+}
+
+.concept-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 0.8fr);
+    gap: 48px;
+    padding-top: 56px;
+}
+.col > h3:first-child { margin-top: 0; }
 
 .num {
     margin: 0 0 6px;
@@ -242,23 +269,29 @@ h3 {
    Animated figure
 ------------------------------------------------------------------- */
 .viz {
+    flex: 1;
+    min-height: 0;
     margin: 0;
-    align-self: start;
-    position: sticky;
-    top: 24px;
-    background: var(--card);
-    border: 1px solid var(--rule);
-    border-radius: 18px;
-    padding: 16px;
-    box-shadow: 0 1px 0 var(--rule), 0 18px 40px -28px rgb(60 40 10 / 0.35);
+    display: flex;
+    flex-direction: column;
 }
-.viz svg { display: block; width: 100%; height: auto; overflow: visible; }
+/* The SVG takes all remaining height and scales up, letterboxed and centred. */
+.viz svg {
+    display: block;
+    flex: 1 1 0;
+    min-height: 320px;
+    width: 100%;
+    max-width: 1500px;
+    margin: 24px auto;
+    overflow: visible;
+}
 
 .viz figcaption {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-top: 12px;
+    width: min(760px, 100%);
+    margin-inline: auto;
 }
 .cmd {
     flex: 1;
@@ -268,7 +301,7 @@ h3 {
     background: var(--code-bg);
     color: var(--code-ink);
     border-radius: 8px;
-    font-size: 13px;
+    font-size: 15px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -316,7 +349,8 @@ h3 {
 .ln.mut-stroke { stroke: var(--muted); }
 .arrowhead { fill: var(--muted); }
 
-.c { stroke: var(--card); stroke-width: 3; }
+.c { stroke: var(--stage-bg, var(--card)); stroke-width: 3; }
+[data-scene="commit"] .c { stroke: var(--surface); } /* dots sit inside a box */
 .c.sm { stroke-width: 2; }
 .c.main { fill: var(--c-main); }
 .c.feat { fill: var(--c-feat); }
@@ -394,14 +428,18 @@ h3 {
 /* ------------------------------------------------------------------
    Responsive
 ------------------------------------------------------------------- */
+@media (max-width: 1000px) {
+    .concept-body { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+    .concept-body .col:first-child { grid-column: 1 / -1; }
+}
+
 @media (max-width: 900px) {
-    .concept {
-        grid-template-columns: minmax(0, 1fr);
-        grid-template-areas: "head" "viz" "body";
-        grid-template-rows: auto;
-        padding: 56px 0;
-    }
-    .viz { position: static; margin-top: 20px; padding: 10px; }
+    .concept { padding-bottom: 56px; }
+    /* On phones the wide drawings can't fill a tall screen; size to content. */
+    .stage { min-height: 0; padding: 40px 0 20px; }
+    .viz svg { flex: none; height: auto; min-height: 0; margin: 20px 0; }
+    .concept-body { grid-template-columns: minmax(0, 1fr); gap: 0; padding-top: 32px; }
+    .concept-body .col { margin-top: 20px; }
     .cmd { white-space: normal; overflow-wrap: anywhere; font-size: 12px; }
     .hero { padding-top: 48px; }
 }

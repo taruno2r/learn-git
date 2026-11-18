@@ -54,6 +54,7 @@
 
         <!-- 01 REPOSITORY -->
         <section class="concept" id="repo">
+            <div class="stage">
             <div class="concept-head">
                 <p class="num">01</p>
                 <h2>Repository <span class="aka">(repo)</span></h2>
@@ -83,12 +84,16 @@
                 </svg>
                 <figcaption><code class="cmd">git init</code><button class="replay" type="button">Replay</button></figcaption>
             </figure>
+            </div>
             <div class="concept-body">
+                <div class="col">
                 <h3>What it does</h3>
                 <p>A repository is your project folder plus a hidden <code>.git</code> directory. That directory is Git's database: every snapshot, branch and commit message ever recorded lives there. You have a <strong>local</strong> repo on your machine, and usually a <strong>remote</strong> copy on GitHub, GitLab or Bitbucket that everyone on the team syncs with.</p>
                 <pre class="code"><code>git init                       # start tracking this folder
 git remote add origin &lt;url&gt;    # link it to GitHub
 git status                     # what's changed?</code></pre>
+                </div>
+                <div class="col">
                 <h3>Considerations</h3>
                 <ul class="tips">
                     <li>Add a <strong>README</strong> that says what the project is and how to run it. It's the first thing people see.</li>
@@ -96,6 +101,8 @@ git status                     # what's changed?</code></pre>
                     <li><strong>Never commit secrets.</strong> Once pushed, they live on in history. If one leaks, rotate it; deleting the file isn't enough.</li>
                     <li>Choose visibility (public or private) and a license on purpose. A public repo without a license isn't actually open source.</li>
                 </ul>
+                </div>
+                <div class="col">
                 <h3>Resources</h3>
                 <ul class="links">
                     <li><a href="https://git-scm.com/book/en/v2/Git-Basics-Getting-a-Git-Repository" target="_blank" rel="noopener">Pro Git: Getting a Git Repository</a></li>
@@ -103,11 +110,13 @@ git status                     # what's changed?</code></pre>
                     <li><a href="https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files" target="_blank" rel="noopener">GitHub Docs: Ignoring files</a></li>
                     <li><a href="https://github.com/github/gitignore" target="_blank" rel="noopener">github/gitignore: ready-made .gitignore templates</a></li>
                 </ul>
+                </div>
             </div>
         </section>
 
         <!-- 02 CLONE -->
         <section class="concept" id="clone">
+            <div class="stage">
             <div class="concept-head">
                 <p class="num">02</p>
                 <h2>Clone</h2>
@@ -140,12 +149,16 @@ git status                     # what's changed?</code></pre>
                 </svg>
                 <figcaption><code class="cmd">git clone https://github.com/you/my-project.git</code><button class="replay" type="button">Replay</button></figcaption>
             </figure>
+            </div>
             <div class="concept-body">
+                <div class="col">
                 <h3>What it does</h3>
                 <p><code>git clone</code> downloads the whole repository: every file, every commit and every branch. It also sets up a remote called <code>origin</code> that points back to where you cloned from, so you can push and pull later. After that you work locally and offline. You don't need the internet until you sync.</p>
                 <pre class="code"><code>git clone https://github.com/you/my-project.git
 cd my-project
 git log --oneline              # the full history is here</code></pre>
+                </div>
+                <div class="col">
                 <h3>Considerations</h3>
                 <ul class="tips">
                     <li><strong>Clone vs fork:</strong> a fork is your own copy <em>on GitHub</em> (for contributing to repos you can't push to). A clone is a copy <em>on your machine</em>. You often fork first, then clone your fork.</li>
@@ -153,17 +166,21 @@ git log --oneline              # the full history is here</code></pre>
                     <li>For huge repos, <code>git clone --depth 1</code> makes a shallow clone with just the latest snapshot.</li>
                     <li>Clone once. After that, <code>git pull</code> keeps you up to date. You don't need to re-clone.</li>
                 </ul>
+                </div>
+                <div class="col">
                 <h3>Resources</h3>
                 <ul class="links">
                     <li><a href="https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository" target="_blank" rel="noopener">GitHub Docs: Cloning a repository</a></li>
                     <li><a href="https://git-scm.com/docs/git-clone" target="_blank" rel="noopener">git-clone reference</a></li>
                     <li><a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh" target="_blank" rel="noopener">GitHub Docs: Connecting with SSH</a></li>
                 </ul>
+                </div>
             </div>
         </section>
 
         <!-- 03 BRANCH -->
         <section class="concept" id="branch">
+            <div class="stage">
             <div class="concept-head">
                 <p class="num">03</p>
                 <h2>Branch</h2>
@@ -186,12 +203,16 @@ git log --oneline              # the full history is here</code></pre>
                 </svg>
                 <figcaption><code class="cmd">git switch -c feature/login</code><button class="replay" type="button">Replay</button></figcaption>
             </figure>
+            </div>
             <div class="concept-body">
+                <div class="col">
                 <h3>What it does</h3>
                 <p>A branch is a lightweight, movable label that points at a commit. Creating one gives you a separate line of work. You can commit, experiment and break things there while <code>main</code> stays stable and keeps moving forward with other people's work. Switching branches swaps the files in your folder to match.</p>
                 <pre class="code"><code>git switch -c feature/login    # create + switch
 git branch                     # list branches
 git switch main                # go back</code></pre>
+                </div>
+                <div class="col">
                 <h3>Considerations</h3>
                 <ul class="tips">
                     <li>Keep branches <strong>short-lived and focused</strong> on one change. Long-running branches drift and end up with painful conflicts.</li>
@@ -199,17 +220,21 @@ git switch main                # go back</code></pre>
                     <li>Branch from an <strong>up-to-date</strong> <code>main</code>: run <code>git pull</code> first.</li>
                     <li>Commit or stash your work before switching, and delete branches once they're merged.</li>
                 </ul>
+                </div>
+                <div class="col">
                 <h3>Resources</h3>
                 <ul class="links">
                     <li><a href="https://learngitbranching.js.org/" target="_blank" rel="noopener">Learn Git Branching: interactive visual tutorial</a></li>
                     <li><a href="https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell" target="_blank" rel="noopener">Pro Git: Branches in a Nutshell</a></li>
                     <li><a href="https://www.atlassian.com/git/tutorials/using-branches" target="_blank" rel="noopener">Atlassian: Using branches</a></li>
                 </ul>
+                </div>
             </div>
         </section>
 
         <!-- 04 COMMIT -->
         <section class="concept" id="commit">
+            <div class="stage">
             <div class="concept-head">
                 <p class="num">04</p>
                 <h2>Commit</h2>
@@ -249,12 +274,16 @@ git switch main                # go back</code></pre>
                 </svg>
                 <figcaption><code class="cmd"># edit some files</code><button class="replay" type="button">Replay</button></figcaption>
             </figure>
+            </div>
             <div class="concept-body">
+                <div class="col">
                 <h3>What it does</h3>
                 <p>A commit permanently records a snapshot of your <strong>staged</strong> files, along with an author, a timestamp, a message and a link to the commit before it. It gets a unique ID (a hash like <code>a1b2c3d</code>). The staging step (<code>git add</code>) lets you choose exactly which changes go into the snapshot, so one commit can hold one logical change.</p>
                 <pre class="code"><code>git add index.html style.css   # stage
 git diff --staged              # review what's staged
 git commit -m "Add login form" # snapshot</code></pre>
+                </div>
+                <div class="col">
                 <h3>Considerations</h3>
                 <ul class="tips">
                     <li>Make <strong>small, atomic commits</strong>: one idea each. They're easier to review, revert and understand later.</li>
@@ -262,17 +291,21 @@ git commit -m "Add login form" # snapshot</code></pre>
                     <li>Review with <code>git diff --staged</code> before committing so you don't ship debug logs.</li>
                     <li>Commits are <strong>local</strong> until you push. Your teammates can't see them yet.</li>
                 </ul>
+                </div>
+                <div class="col">
                 <h3>Resources</h3>
                 <ul class="links">
                     <li><a href="https://cbea.ms/git-commit/" target="_blank" rel="noopener">How to Write a Git Commit Message (Chris Beams)</a></li>
                     <li><a href="https://www.conventionalcommits.org/en/v1.0.0/" target="_blank" rel="noopener">Conventional Commits specification</a></li>
                     <li><a href="https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository" target="_blank" rel="noopener">Pro Git: Recording Changes to the Repository</a></li>
                 </ul>
+                </div>
             </div>
         </section>
 
         <!-- 05 PUSH / PULL -->
         <section class="concept" id="pushpull">
+            <div class="stage">
             <div class="concept-head">
                 <p class="num">05</p>
                 <h2>Push / Pull</h2>
@@ -313,12 +346,16 @@ git commit -m "Add login form" # snapshot</code></pre>
                 </svg>
                 <figcaption><code class="cmd">git push origin main</code><button class="replay" type="button">Replay</button></figcaption>
             </figure>
+            </div>
             <div class="concept-body">
+                <div class="col">
                 <h3>What it does</h3>
                 <p><code>git push</code> uploads the commits you made locally to the matching branch on the remote, so others can see them. <code>git pull</code> does the reverse: it <em>fetches</em> new commits from the remote and <em>merges</em> (or rebases) them into your current branch, bringing in your teammates' work.</p>
                 <pre class="code"><code>git push origin main           # upload your commits
 git pull                       # = git fetch + git merge
 git fetch                      # download, but don't touch my files</code></pre>
+                </div>
+                <div class="col">
                 <h3>Considerations</h3>
                 <ul class="tips">
                     <li><strong>Pull before you start</strong> work and again before you push. It keeps conflicts small.</li>
@@ -326,17 +363,21 @@ git fetch                      # download, but don't touch my files</code></pre>
                     <li>Avoid <code>git push --force</code> on shared branches because it can delete teammates' work. If you really must, use <code>--force-with-lease</code>.</li>
                     <li>The first push of a new branch needs <code>git push -u origin &lt;branch&gt;</code> to set its upstream.</li>
                 </ul>
+                </div>
+                <div class="col">
                 <h3>Resources</h3>
                 <ul class="links">
                     <li><a href="https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes" target="_blank" rel="noopener">Pro Git: Working with Remotes</a></li>
                     <li><a href="https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository" target="_blank" rel="noopener">GitHub Docs: Pushing commits to a remote</a></li>
                     <li><a href="https://www.atlassian.com/git/tutorials/syncing/git-pull" target="_blank" rel="noopener">Atlassian: git pull</a></li>
                 </ul>
+                </div>
             </div>
         </section>
 
         <!-- 06 DIFF -->
         <section class="concept" id="diff">
+            <div class="stage">
             <div class="concept-head">
                 <p class="num">06</p>
                 <h2>Diff</h2>
@@ -379,12 +420,16 @@ git fetch                      # download, but don't touch my files</code></pre>
                 </svg>
                 <figcaption><code class="cmd">git diff main feature/login</code><button class="replay" type="button">Replay</button></figcaption>
             </figure>
+            </div>
             <div class="concept-body">
+                <div class="col">
                 <h3>What it does</h3>
                 <p>A diff shows, line by line, what was <span class="tag-del">removed (−)</span> and what was <span class="tag-add">added (+)</span> between two versions. You can compare your unsaved edits against the last commit, staged changes, two commits or two whole branches. Pull requests on GitHub are built around the diff.</p>
                 <pre class="code"><code>git diff                       # unstaged edits
 git diff --staged              # what will be committed
 git diff main feature/login    # compare two branches</code></pre>
+                </div>
+                <div class="col">
                 <h3>Considerations</h3>
                 <ul class="tips">
                     <li><strong>Read your own diff</strong> before every commit and PR. It's the cheapest code review there is.</li>
@@ -392,17 +437,21 @@ git diff main feature/login    # compare two branches</code></pre>
                     <li>Smaller diffs get reviewed faster and more carefully.</li>
                     <li>Binary files like images and PDFs don't diff line by line, so GitHub shows image diffs visually instead.</li>
                 </ul>
+                </div>
+                <div class="col">
                 <h3>Resources</h3>
                 <ul class="links">
                     <li><a href="https://www.atlassian.com/git/tutorials/saving-changes/git-diff" target="_blank" rel="noopener">Atlassian: git diff</a></li>
                     <li><a href="https://git-scm.com/docs/git-diff" target="_blank" rel="noopener">git-diff reference</a></li>
                     <li><a href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-comparing-branches-in-pull-requests" target="_blank" rel="noopener">GitHub Docs: Comparing branches in pull requests</a></li>
                 </ul>
+                </div>
             </div>
         </section>
 
         <!-- 07 MERGE -->
         <section class="concept" id="merge">
+            <div class="stage">
             <div class="concept-head">
                 <p class="num">07</p>
                 <h2>Merge</h2>
@@ -427,13 +476,17 @@ git diff main feature/login    # compare two branches</code></pre>
                 </svg>
                 <figcaption><code class="cmd">git merge feature/login</code><button class="replay" type="button">Replay</button></figcaption>
             </figure>
+            </div>
             <div class="concept-body">
+                <div class="col">
                 <h3>What it does</h3>
                 <p>Merging takes the commits from one branch and joins them into another. If both branches have moved on, Git creates a <strong>merge commit</strong> with two parents that ties the histories together. If only your branch moved, Git simply <em>fast-forwards</em> the label. On GitHub this is usually the last step of a pull request.</p>
                 <pre class="code"><code>git switch main
 git pull                       # make sure main is current
 git merge feature/login
 git branch -d feature/login    # tidy up</code></pre>
+                </div>
+                <div class="col">
                 <h3>Considerations</h3>
                 <ul class="tips">
                     <li>Merging keeps the <strong>true history</strong>: you can always see when a branch existed and when it landed.</li>
@@ -441,17 +494,21 @@ git branch -d feature/login    # tidy up</code></pre>
                     <li>Run the tests after merging, because two branches can each be fine and still break together.</li>
                     <li>If both sides touched the same lines, you'll get a <a href="#conflict">merge conflict</a>.</li>
                 </ul>
+                </div>
+                <div class="col">
                 <h3>Resources</h3>
                 <ul class="links">
                     <li><a href="https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging" target="_blank" rel="noopener">Pro Git: Basic Branching and Merging</a></li>
                     <li><a href="https://www.atlassian.com/git/tutorials/using-branches/git-merge" target="_blank" rel="noopener">Atlassian: git merge</a></li>
                     <li><a href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/about-merge-methods-on-github" target="_blank" rel="noopener">GitHub Docs: About merge methods</a></li>
                 </ul>
+                </div>
             </div>
         </section>
 
         <!-- 08 REBASE -->
         <section class="concept" id="rebase">
+            <div class="stage">
             <div class="concept-head">
                 <p class="num">08</p>
                 <h2>Rebase</h2>
@@ -482,13 +539,17 @@ git branch -d feature/login    # tidy up</code></pre>
                 </svg>
                 <figcaption><code class="cmd">git rebase main</code><button class="replay" type="button">Replay</button></figcaption>
             </figure>
+            </div>
             <div class="concept-body">
+                <div class="col">
                 <h3>What it does</h3>
                 <p>Rebase lifts your branch's commits off their old starting point and replays them, one by one, on top of the tip of <code>main</code>. Git creates <strong>new</strong> commits (A′, B′) with the same changes but new IDs. The result is a clean, straight history, as if you'd started your work from today's <code>main</code>.</p>
                 <pre class="code"><code>git switch feature/login
 git rebase main
 # fix any conflict, then:
 git rebase --continue          # or --abort to undo</code></pre>
+                </div>
+                <div class="col">
                 <h3>Considerations</h3>
                 <ul class="tips">
                     <li><strong>The golden rule:</strong> don't rebase commits that other people have already pulled. Rebasing rewrites history, and their copies won't match yours.</li>
@@ -496,17 +557,21 @@ git rebase --continue          # or --abort to undo</code></pre>
                     <li>Conflicts can show up once per replayed commit. Resolve each one, <code>git add</code>, then <code>--continue</code>.</li>
                     <li><code>git rebase -i</code> (interactive) lets you squash, reorder or reword commits before opening a PR.</li>
                 </ul>
+                </div>
+                <div class="col">
                 <h3>Resources</h3>
                 <ul class="links">
                     <li><a href="https://www.atlassian.com/git/tutorials/merging-vs-rebasing" target="_blank" rel="noopener">Atlassian: Merging vs. Rebasing</a></li>
                     <li><a href="https://git-scm.com/book/en/v2/Git-Branching-Rebasing" target="_blank" rel="noopener">Pro Git: Rebasing</a></li>
                     <li><a href="https://git-scm.com/docs/git-rebase" target="_blank" rel="noopener">git-rebase reference</a></li>
                 </ul>
+                </div>
             </div>
         </section>
 
         <!-- 09 MERGE CONFLICT -->
         <section class="concept" id="conflict">
+            <div class="stage">
             <div class="concept-head">
                 <p class="num">09</p>
                 <h2>Merge conflict</h2>
@@ -549,13 +614,17 @@ git rebase --continue          # or --abort to undo</code></pre>
                 </svg>
                 <figcaption><code class="cmd">git merge feature/login</code><button class="replay" type="button">Replay</button></figcaption>
             </figure>
+            </div>
             <div class="concept-body">
+                <div class="col">
                 <h3>What it does</h3>
                 <p>When two branches change the <strong>same lines</strong> in different ways, Git can't guess which is right. It pauses the merge and writes both versions into the file between <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code> and <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> markers. You edit the file to the correct result, delete the markers, then <code>git add</code> and <code>git commit</code> to finish.</p>
                 <pre class="code"><code>git status                     # lists conflicted files
 # edit index.html, remove the markers
 git add index.html
 git commit                     # completes the merge</code></pre>
+                </div>
+                <div class="col">
                 <h3>Considerations</h3>
                 <ul class="tips">
                     <li><strong>Don't panic.</strong> <code>git merge --abort</code> (or <code>git rebase --abort</code>) puts everything back the way it was.</li>
@@ -564,17 +633,21 @@ git commit                     # completes the merge</code></pre>
                     <li>Prevent conflicts by pulling often and keeping branches small. If you're unsure, talk to whoever wrote the other change.</li>
                     <li>Editors like VS Code show "Accept Current / Incoming / Both" buttons that make this much easier.</li>
                 </ul>
+                </div>
+                <div class="col">
                 <h3>Resources</h3>
                 <ul class="links">
                     <li><a href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/resolving-a-merge-conflict-using-the-command-line" target="_blank" rel="noopener">GitHub Docs: Resolving a merge conflict</a></li>
                     <li><a href="https://www.atlassian.com/git/tutorials/using-branches/merge-conflicts" target="_blank" rel="noopener">Atlassian: Merge conflicts</a></li>
                     <li><a href="https://ohshitgit.com/" target="_blank" rel="noopener">Oh Shit, Git!?!: plain-English fixes for common messes</a></li>
                 </ul>
+                </div>
             </div>
         </section>
 
         <!-- 10 PULL REQUEST -->
         <section class="concept" id="pr">
+            <div class="stage">
             <div class="concept-head">
                 <p class="num">10</p>
                 <h2>Pull Request <span class="aka">(PR)</span></h2>
@@ -621,12 +694,16 @@ git commit                     # completes the merge</code></pre>
                 </svg>
                 <figcaption><code class="cmd">gh pr create --base main</code><button class="replay" type="button">Replay</button></figcaption>
             </figure>
+            </div>
             <div class="concept-body">
+                <div class="col">
                 <h3>What it does</h3>
                 <p>A pull request is a GitHub page that proposes merging your branch into another, usually <code>main</code>. It shows the diff, runs automated checks (tests, linting, previews), and gives teammates a place to comment, suggest changes and approve. Pushing more commits to the branch updates the PR automatically. When it's approved, someone clicks <strong>Merge</strong>.</p>
                 <pre class="code"><code>git push -u origin feature/login
 gh pr create --base main --fill   # or use the GitHub website
 gh pr merge --squash</code></pre>
+                </div>
+                <div class="col">
                 <h3>Considerations</h3>
                 <ul class="tips">
                     <li><strong>Small PRs</strong> get reviewed faster and more carefully. Aim for something reviewable in about 15 minutes.</li>
@@ -635,6 +712,8 @@ gh pr merge --squash</code></pre>
                     <li>Open a <strong>draft PR</strong> early if you want feedback before the work is finished.</li>
                     <li>When reviewing, comment on the code, not the person, and explain the reasons behind your suggestions.</li>
                 </ul>
+                </div>
+                <div class="col">
                 <h3>Resources</h3>
                 <ul class="links">
                     <li><a href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests" target="_blank" rel="noopener">GitHub Docs: About pull requests</a></li>
@@ -642,11 +721,13 @@ gh pr merge --squash</code></pre>
                     <li><a href="https://google.github.io/eng-practices/review/" target="_blank" rel="noopener">Google Engineering Practices: Code Review</a></li>
                     <li><a href="https://cli.github.com/" target="_blank" rel="noopener">GitHub CLI (gh)</a></li>
                 </ul>
+                </div>
             </div>
         </section>
 
         <!-- 11 ISSUE -->
         <section class="concept" id="issue">
+            <div class="stage">
             <div class="concept-head">
                 <p class="num">11</p>
                 <h2>Issue</h2>
@@ -683,12 +764,16 @@ gh pr merge --squash</code></pre>
                 </svg>
                 <figcaption><code class="cmd">gh issue create --label bug</code><button class="replay" type="button">Replay</button></figcaption>
             </figure>
+            </div>
             <div class="concept-body">
+                <div class="col">
                 <h3>What it does</h3>
                 <p>Issues are GitHub's to-do list for a project: bug reports, feature requests and tasks. Each one has a number (<code>#42</code>), a discussion thread, <strong>labels</strong>, <strong>assignees</strong> and milestones. Link an issue to the PR that solves it and it closes itself when that PR merges, which leaves a clear trail from problem to fix.</p>
                 <pre class="code"><code>gh issue create --title "Safari login broken" --label bug
 gh issue list --assignee @me
 git commit -m "Fix Safari login (fixes #42)"</code></pre>
+                </div>
+                <div class="col">
                 <h3>Considerations</h3>
                 <ul class="tips">
                     <li>A good bug report has <strong>steps to reproduce</strong>, expected vs. actual behaviour, the environment (browser, OS, version) and screenshots.</li>
@@ -696,6 +781,8 @@ git commit -m "Fix Safari login (fixes #42)"</code></pre>
                     <li>Agree on a small set of labels and add <strong>issue templates</strong> so reports arrive consistent.</li>
                     <li>Use GitHub Projects boards to plan and prioritise across many issues.</li>
                 </ul>
+                </div>
+                <div class="col">
                 <h3>Resources</h3>
                 <ul class="links">
                     <li><a href="https://docs.github.com/en/issues/tracking-your-work-with-issues/about-issues" target="_blank" rel="noopener">GitHub Docs: About issues</a></li>
@@ -703,6 +790,7 @@ git commit -m "Fix Safari login (fixes #42)"</code></pre>
                     <li><a href="https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository" target="_blank" rel="noopener">GitHub Docs: Configuring issue templates</a></li>
                     <li><a href="https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects" target="_blank" rel="noopener">GitHub Docs: About Projects</a></li>
                 </ul>
+                </div>
             </div>
         </section>
 

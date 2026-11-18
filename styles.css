@@ -5,6 +5,7 @@
     --paper: #f5f0dc;
     --card: #fffbef;
     --surface: #fbf6e6;
+    --band: #f1e6c6;
     --ink: #1c1813;
     --muted: #6f6656;
     --rule: #e0d6ba;
@@ -40,6 +41,7 @@
         --paper: #15120e;
         --card: #1e1a14;
         --surface: #25201a;
+        --band: #2b241b;
         --ink: #f2ead6;
         --muted: #a89e88;
         --rule: #3b342a;
@@ -167,7 +169,10 @@ h1 { font-size: clamp(56px, 11vw, 128px); letter-spacing: -0.01em; }
     isolation: isolate;
     padding-bottom: 96px;
     scroll-margin-top: 0;
+    --stage-bg: var(--card);
 }
+/* Alternate the background on every other concept so sections are easy to tell apart. */
+.concept:nth-of-type(even) { --stage-bg: var(--band); }
 .concept::before {
     content: "";
     position: absolute;
@@ -175,7 +180,7 @@ h1 { font-size: clamp(56px, 11vw, 128px); letter-spacing: -0.01em; }
     z-index: -1;
     background:
         radial-gradient(circle, color-mix(in srgb, var(--muted) 22%, transparent) 1px, transparent 1.5px) 0 0 / 28px 28px,
-        var(--card);
+        var(--stage-bg);
 }
 .concept + .concept::before { border-top: 1px solid var(--rule); }
 
@@ -344,7 +349,8 @@ h3 {
 .ln.mut-stroke { stroke: var(--muted); }
 .arrowhead { fill: var(--muted); }
 
-.c { stroke: var(--card); stroke-width: 3; }
+.c { stroke: var(--stage-bg, var(--card)); stroke-width: 3; }
+[data-scene="commit"] .c { stroke: var(--surface); } /* dots sit inside a box */
 .c.sm { stroke-width: 2; }
 .c.main { fill: var(--c-main); }
 .c.feat { fill: var(--c-feat); }

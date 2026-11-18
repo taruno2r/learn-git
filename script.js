@@ -368,7 +368,7 @@
 
         ScrollTrigger.create({
             trigger: fig,
-            start: 'top 75%',
+            start: 'top 50%', // the stage is full-screen: wait until it's mostly in view
             once: true,
             onEnter: () => s.tl.play(),
         });
